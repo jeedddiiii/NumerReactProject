@@ -12,12 +12,12 @@ const Bisection = () => {
 
   const inputXl = (e) => {
     const value = e.target.value;
-    setXl(Number(value));
+    setXl(value);
   };
 
   const inputXr = (e) => {
     const value = e.target.value;
-    setXr(Number(value));
+    setXr(value);
   };
 
   const calculate = () => {
@@ -26,8 +26,8 @@ const Bisection = () => {
     let x;
     let fxr;
     let fxm;
-    let newXr =xr;
-    let newXl = xl;
+    let newXr = Number(xr);
+    let newXl = Number(xl);
     do {
       xm = (newXl + newXr) / 2;
       x = xm;
@@ -42,7 +42,7 @@ const Bisection = () => {
         newXr = xm;
       }
     } while (Math.abs(error) >= 0.0001);
-    setResult(xm);
+    setResult(xm.toFixed(6));
   };
 
   return (
@@ -57,14 +57,23 @@ const Bisection = () => {
             onChange={inputEquations}
           />
         </div>
-
         <div>
           <label>xl :</label>
-          <input placeholder="enter a xr" value={xl} onChange={inputXl} />
+          <input
+            type="text"
+            placeholder="enter a xr"
+            value={xl}
+            onChange={inputXl}
+          />
         </div>
         <div>
           <label>xr :</label>
-          <input placeholder="enter a xl" value={xr} onChange={inputXr} />
+          <input
+            type="text"
+            placeholder="enter a xl"
+            value={xr}
+            onChange={inputXr}
+          />
         </div>
         <div>
           <button type="button" onClick={calculate}>
