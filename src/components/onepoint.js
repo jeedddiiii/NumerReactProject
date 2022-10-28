@@ -1,20 +1,57 @@
-const fx = (x) => {
-  return -x+0.5+x;
+import React, { useState } from "react";
+
+const OnePoint = () => {
+  const [equations, setEquations] = useState("");
+  const [xn, setXn] = useState("");
+  const [result, setResult] = useState("");
+
+  const inputEquations = (e) => {
+    const value = e.target.value;
+    setEquations(value);
+  };
+  
+  const inputXn = (e) => {
+    const value = e.target.value;
+    setXn(value);
+  };
+
+  const calculate = () => {
+    let fx,
+      error = 1,
+      x = Number(xn);
+    do {
+      fx = eval(equations);
+      error = Math.abs((fx - x) / fx);
+      x = fx;
+    } while (error >= 0.0001);
+    setResult(x.toFixed(6));
+  };
+  return (
+    <div className="App">
+      <form>
+        <div className="form-group">
+          <label>equations :</label>
+          <input
+            type="text"
+            placeholder="enter a equations"
+            value={equations}
+            onChange={inputEquations}
+          />
+          <label>initial guess :</label>
+          <input
+            type="text"
+            placeholder="enter a initial guess"
+            value={xn}
+            onChange={inputXn}
+          />
+        </div>
+        <button type="button" onClick={calculate}>
+          calculate
+        </button>
+      </form>
+      <h1>result : {result}</h1>
+    </div>
+  );
 };
-const onepoint = (x) => {
-  do {
-    xnew = fx(x);
-    error = Math.abs(((xnew - x) / xnew));
-    if (isNaN(error)) {
-      console.log("Zero division error");
-      return;
-    }
-    console.log("X"  +i+ ":" + xnew.toFixed(6) + " error:" + error.toFixed(6));
-    i++;
-    x = xnew;
-    err = Math.abs(error);
-  } while (err >= 0.000001);
-}
-let x = 0, i = 0;
-let xnew, error, err;
-onepoint(x);
+
+export default OnePoint;
