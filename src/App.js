@@ -7,6 +7,8 @@ import FalsePosition from './components/falsePosition';
 import OnePoint from './components/onepoint';
 import NewtonRaphson from './components/newton';
 import Secant from './components/secant';
+import Cramer from './components/cramer';
+import CramersRule from './components/cramers_rule';
 function App() {
   return (
     <div>
@@ -19,7 +21,7 @@ function App() {
       </Routes>
       </NavBar> */}
         <h1>ไอเหี้ย</h1>
-        <Secant/>
+        <Cramer/>
       {/* </BrowserRouter> */}
 
 

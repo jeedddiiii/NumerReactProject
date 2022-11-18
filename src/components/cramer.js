@@ -1,44 +1,86 @@
-const cramersRule = (a, result, det) => {
-  x1 =
-    (result[0] * a[1][1] * a[2][2] +
-      a[0][1] * a[1][2] * result[2] +
-      a[0][2] * result[1] * a[2][1] -
-      a[0][2] * a[1][1] * result[2] -
-      result[0] * a[1][2] * a[2][1] -
-      a[0][1] * result[1] * a[2][2]) /
-    det;
-  x2 =
-    (a[0][0] * result[1] * a[2][2] +
-      result[0] * a[1][2] * a[2][0] +
-      a[0][2] * a[1][0] * result[2] -
-      a[0][2] * result[1] * a[2][0] -
-      a[0][0] * a[1][2] * result[2] -
-      result[0] * a[1][0] * a[2][2]) /
-    det;
-  x3 =
-    (a[0][0] * a[1][1] * result[2] +
-      a[0][1] * result[1] * a[2][0] +
-      result[0] * a[1][0] * a[2][1] -
-      result[0] * a[1][1] * a[2][0] -
-      a[0][0] * result[1] * a[2][1] -
-      a[0][1] * a[1][0] * result[2]) /
-    det;
-  return x1, x2, x3;
-};
-var x1, x2, x3;
-var a = [
-  [-2, 3, 1],
-  [3, 4, -5],
-  [1, -2, 1],
-];
-var result = [9, 0, -4];
-var det =
-  a[0][0] * a[1][1] * a[2][2] +
-  a[0][1] * a[1][2] * a[2][0] +
-  a[0][2] * a[1][0] * a[2][1] -
-  a[0][2] * a[1][1] * a[2][0] -
-  a[0][1] * a[1][0] * a[2][2] -
-  a[0][0] * a[1][2] * a[2][1];
+import { Button } from "react-bootstrap";
+import {React,Component} from "react";
+import Form from "react-bootstrap/Form";
+import '../App.css';
 
-cramersRule(a, result, det);
-console.log("x1 = " + x1 + " x2 = " + x2 + " x3 = " + x3);
+class Cramer extends Component {
+    constructor(){
+        super();
+        console.log("constructor called");
+    }
+    componentDidMount(){
+        console.log("componentDidMount called");
+    }
+    getValue() {
+
+        function cloneArray(A) {
+            var B = []
+            for (let i = 0; i < A.length; i++) {
+                B[i] = A[i].slice()
+            }
+            return B
+        }
+
+        var A = [];
+        var B = [];
+        var ansstring='';
+        var count=1;
+        const math = require("mathjs"); 
+        var size = document.getElementById("inputmatrix").value;
+        for(var i=0;i<size;i++){
+            A.push([]);
+            B.push([]);
+            for(var j=0;j<size;j++){
+                A[i].push(document.getElementById('mat'+i+j).value);
+            }
+            B[i].push(document.getElementById('matans'+i+"0").value);
+        }
+        var detA = math.det(A);
+        console.log(A,B);
+        for(var i=0;i<size;i++){
+            var tmp =cloneArray(A);
+            for(var j=0;j<size;j++){
+                tmp[j][i] = B[j][0];
+            }
+            var dettmp = math.det(tmp);
+            var ans =  dettmp/detA;
+            ansstring+="<h4>x"+count+" = "+ans+"</h4>";
+            count++;    
+        }
+        document.getElementById("ansstring").innerHTML=ansstring;
+
+    }
+    creatematrix=()=>{
+        var size = document.getElementById("inputmatrix").value;
+        var matstring='';
+        for(var i=0;i<size;i++){
+            for(var j=0;j<size;j++){
+                matstring+="<input id='mat"+i+j+"' type='number' step='1' placeholder='A"+i+j+"' class='input-matrix'/>";
+            }
+            matstring+=' | <input type="number" id="matans'+i+'0" placeholder="B0'+j+'" class="input-matrix"/>';
+            matstring+="<br>";
+        }
+        document.getElementById("matrixinput").innerHTML=matstring;
+    }
+    render() {
+        return (
+            <div>
+                <h1 class="header"><p/>Cramer's Rule</h1>
+                <Form>
+                    <Form.Group className="mb-3">
+                        <div style={{margin:"0px 0px 25px 0px"}}>
+                            <h4>Enter Number</h4><p/>
+                            <input id="inputmatrix" type="number" step="1" placeholder="size of matrix" class="input-sizematrix" onChange={this.creatematrix}/>
+                            <div id="matrixinput"></div>
+                        </div>
+                        <Button onClick={this.getValue}>
+                            Submit
+                        </Button>
+                    </Form.Group>
+                </Form>
+                <div id="ansstring"/>
+            </div>
+        );
+    }
+}
+export default Cramer;
