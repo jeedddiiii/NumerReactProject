@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
 const Bisection = () => {
+  const [arrIt,setArrIt] = useState([]);
+  const [arrXl,setArrXl] = useState([]);
+  const [arrXr,setArrXr] = useState([]);
+  const [arrXm,setArrXm] = useState([]);
   const [equations, setEquations] = useState("");
   const [xl, setXl] = useState("");
   const [xr, setXr] = useState("");
@@ -22,6 +26,8 @@ const Bisection = () => {
 
   const calculate = () => {
     let error = 1;
+    let it = 0;
+    let i = 1;
     let xm;
     let x;
     let fxr;
@@ -29,6 +35,9 @@ const Bisection = () => {
     let newXr = Number(xr);
     let newXl = Number(xl);
     do {
+      arrIt.push(it);
+      arrXl.push(newXl);
+      arrXr.push(newXr);
       xm = (newXl + newXr) / 2;
       x = xm;
       fxm = eval(equations);
@@ -41,6 +50,10 @@ const Bisection = () => {
         error = (newXr - xm) / xm;
         newXr = xm;
       }
+      
+      arrXm.push(xm);
+      it++;
+
     } while (Math.abs(error) >= 0.0001);
     setResult(xm.toFixed(6));
   };
@@ -83,6 +96,28 @@ const Bisection = () => {
         <div>
           <span>your result is {result}</span>
         </div>
+        <div>
+          <table>
+            <tr>
+              <th>Iteration</th>
+              <th>Xl</th>
+              <th>Xr</th>
+              <th>Xm</th>
+            </tr>
+            {arrIt.map((item,index) => {
+              return (
+                <tr>
+                  <td>{item}</td>
+                  <td>{arrXl[index]}</td>
+                  <td>{arrXr[index]}</td>
+                  <td>{arrXm[index]}</td>
+                </tr>
+              );
+            })}
+          </table>
+
+        </div>
+
       </form>
     </div>
   );
