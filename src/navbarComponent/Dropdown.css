@@ -1,0 +1,47 @@
+.rootofequation-submenu{
+    width: 11rem;
+    position: absolute;
+    right: 661px;
+    top: 88px;
+    list-style: none;
+    text-align:start;
+}
+.rootofequation-submenu li {
+    background: rgb(0,212,212);
+    cursor: pointer;
+}
+.rootofequation-submenu.clicked{
+    display: none;
+
+}
+.submenu-item {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    padding: 16px;
+
+
+}
+.submenu-item:hover {
+    background: rgb(0,175,175);
+
+
+}
+.linearalgebra-submenu{
+    width: 11rem;
+    position: absolute;
+    right: 461px;
+    top: 88px;
+    list-style: none;
+    text-align:start;
+}
+.linearalgebra-submenu li{
+    background: rgb(0,212,212);
+    cursor: pointer;
+}
+.linearalgebra-submenu.clicked{
+    display: none;
+
+}

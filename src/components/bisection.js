@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 const Bisection = () => {
-  const [arrIt,setArrIt] = useState([]);
-  const [arrXl,setArrXl] = useState([]);
-  const [arrXr,setArrXr] = useState([]);
-  const [arrXm,setArrXm] = useState([]);
+  const math = require("mathjs");
+  const [arrIt, setArrIt] = useState([]);
+  const [arrXl, setArrXl] = useState([]);
+  const [arrXr, setArrXr] = useState([]);
+  const [arrXm, setArrXm] = useState([]);
   const [equations, setEquations] = useState("");
   const [xl, setXl] = useState("");
   const [xr, setXr] = useState("");
@@ -25,6 +26,19 @@ const Bisection = () => {
   };
 
   const calculate = () => {
+    while (arrXr.length > 0) {
+      arrXr.pop();
+    }
+    while (arrXl.length > 0) {
+      arrXl.pop();
+    }
+    while (arrXm.length > 0) {
+      arrXm.pop();
+    }
+    while (arrIt.length > 0) {
+      arrIt.pop();
+    }
+
     let error = 1;
     let it = 0;
     let i = 1;
@@ -39,10 +53,16 @@ const Bisection = () => {
       arrXl.push(newXl);
       arrXr.push(newXr);
       xm = (newXl + newXr) / 2;
-      x = xm;
-      fxm = eval(equations);
-      x = newXr;
-      fxr = eval(equations);
+      // x = xm;
+      fxm = math.evaluate(equations, { x: xm });
+      // x = newXr;
+      fxr = math.evaluate(equations, { x: newXr });
+      console.log(equations);
+      console.log(newXl);
+      console.log(newXr);
+      console.log(fxr);
+      console.log(fxm);
+      console.log(fxm * fxr);
       if (fxm * fxr < 0) {
         error = (xm - newXl) / xm;
         newXl = xm;
@@ -50,10 +70,9 @@ const Bisection = () => {
         error = (newXr - xm) / xm;
         newXr = xm;
       }
-      
+
       arrXm.push(xm);
       it++;
-
     } while (Math.abs(error) >= 0.0001);
     setResult(xm.toFixed(6));
   };
@@ -104,7 +123,7 @@ const Bisection = () => {
               <th>Xr</th>
               <th>Xm</th>
             </tr>
-            {arrIt.map((item,index) => {
+            {arrIt.map((item, index) => {
               return (
                 <tr>
                   <td>{item}</td>
@@ -115,9 +134,7 @@ const Bisection = () => {
               );
             })}
           </table>
-
         </div>
-
       </form>
     </div>
   );

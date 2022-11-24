@@ -1,35 +1,25 @@
-import './App.css';
-import  React  from  'react' ;
-import Sidebar from './sidebar/sidebar';
+import "./App.css";
+import React from "react";
+import NavBar from "./navbarComponent/Navbar";
 
-import {BrowserRouter as Switch,Route,Router} from 'react-router-dom';
-import NavBar from './components/NavBar';
-import Bisection from './components/bisection';
-import FalsePosition from './components/falsePosition';
-import OnePoint from './components/onepoint';
-import NewtonRaphson from './components/newton';
-import Secant from './components/secant';
-import Cramer from './components/cramer';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Bisection from "./components/bisection";
+import FalsePosition from "./components/falsePosition";
+import OnePoint from "./components/onepoint";
+import NewtonRaphson from "./components/newton";
+import Secant from "./components/secant";
+import Cramer from "./components/cramer";
 function App() {
   return (
-    <div className="App">
-      <Bisection/>
+    <div>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route></Route>
+          <Route path="/bisection" element={<Bisection />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-    // <Router>
-      /* <BrowserRouter>
-      <NavBar>
-      <Routes>
-        <route>
-          
-        </route>
-      </Routes>
-      </NavBar> */
-        /* <h1>ไอเหี้ย</h1> */
-        
-      /* </BrowserRouter> */
-
-
-    // </Router>
   );
 }
 
