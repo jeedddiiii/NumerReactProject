@@ -1,8 +1,8 @@
 .rootofequation-submenu{
     width: 11rem;
     position: absolute;
-    right: 661px;
-    top: 88px;
+    right: 690px;
+    top: 70px;
     list-style: none;
     text-align:start;
 }
@@ -32,8 +32,8 @@
 .linearalgebra-submenu{
     width: 11rem;
     position: absolute;
-    right: 461px;
-    top: 88px;
+    right: 500px;
+    top: 70px;
     list-style: none;
     text-align:start;
 }
@@ -42,6 +42,40 @@
     cursor: pointer;
 }
 .linearalgebra-submenu.clicked{
+    display: none;
+
+}
+
+.interpolation-submenu{
+    width: 11rem;
+    position: absolute;
+    right: 300px;
+    top: 70px;
+    list-style: none;
+    text-align:start;
+}
+.interpolation-submenu li{
+    background: rgb(0,212,212);
+    cursor: pointer;
+}
+.interpolation-submenu.clicked{
+    display: none;
+
+}
+
+.regression-submenu{
+    width: 11rem;
+    position: absolute;
+    right: 130px;
+    top: 70px;
+    list-style: none;
+    text-align:start;
+}
+.regression-submenu li{
+    background: rgb(0,212,212);
+    cursor: pointer;
+}
+.regression-submenu.clicked{
     display: none;
 
 }

@@ -1,7 +1,18 @@
 import React, { useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 const Bisection = () => {
   const math = require("mathjs");
+  const data = [];
+  const datax = [];
   const [arrIt, setArrIt] = useState([]);
   const [arrXl, setArrXl] = useState([]);
   const [arrXr, setArrXr] = useState([]);
@@ -41,7 +52,6 @@ const Bisection = () => {
 
     let error = 1;
     let it = 0;
-    let i = 1;
     let xm;
     let x;
     let fxr;
@@ -74,6 +84,18 @@ const Bisection = () => {
       arrXm.push(xm);
       it++;
     } while (Math.abs(error) >= 0.0001);
+    for (let i = 0; i < it; i++) {
+      datax.push({
+        iter: arrIt[i],
+        xl: arrXl[i],
+        xr: arrXr[i],
+        xm: arrXm[i],
+      });
+    }
+    for (let i = 0; i < it; i++) {
+      data.push(datax[i]);
+      console.log(datax[i]);
+    }
     setResult(xm.toFixed(6));
   };
 
@@ -119,9 +141,9 @@ const Bisection = () => {
           <table>
             <tr>
               <th>Iteration</th>
-              <th>Xl</th>
-              <th>Xr</th>
-              <th>Xm</th>
+              <th>xl</th>
+              <th>xr</th>
+              <th>xm</th>
             </tr>
             {arrIt.map((item, index) => {
               return (
@@ -135,6 +157,29 @@ const Bisection = () => {
             })}
           </table>
         </div>
+        {/* <div>
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="iter" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="xl" stroke="#8884d8" />
+            <Line type="monotone" dataKey="xr" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="xm" stroke="#000000" />
+          </LineChart>
+        </div> */}
+        
       </form>
     </div>
   );

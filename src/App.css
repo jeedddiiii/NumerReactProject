@@ -5,3 +5,24 @@
   box-sizing: border-box;
   font-family: 'Mitr', sans-serif;
 }
+table {
+  width: 30%;
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: 5px;
+  text-align: center;
+}
+th {
+  background-color: grey;
+  color: white;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:hover {
+  background-color: #ddd;
+}

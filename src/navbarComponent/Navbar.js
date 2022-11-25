@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import * as Fa from "react-icons/fa";
+import * as Ai from "react-icons/ai";
 import "./Navbar.css";
 import { navItems } from "./NavItems";
-import Button from "./Button";
-import Dropdown from "./Dropdown";
+import {EquationDropDown } from "./Dropdown";
+import {AlgebraDropDown} from "./Dropdown";
+import {InterpolationDropDown} from "./Dropdown";
+import {RegressionDropDown} from "./Dropdown";
 
 function Navbar() {
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdownEquation, setDropdownEquation] = useState(false);
+  const [dropdownAlgebra, setDropdownAlgebra] = useState(false);
+  const [dropdownInterpolation, setDropdownInterpolation] = useState(false);
+  const [dropdownRegression, setDropdownRegression] = useState(false);
   return (
     <div>
       <nav className="navbar">
         <Link to="/" className="navbar-logo">
-          Nature
-          <Fa.FaTree />
+          Numerical
+          <Ai.AiOutlineCalculator />
         </Link>
         <ul className="nav-items">
           {navItems.map((item) => {
@@ -22,24 +27,50 @@ function Navbar() {
                 <li
                   key={item.id}
                   className={item.cName}
-                  onMouseEnter={() => setDropdown(true)}
-                  onMouseLeave={() => setDropdown(false)}
+                  onMouseEnter={() => setDropdownEquation(true)}
+                  onMouseLeave={() => setDropdownEquation(false)}
                 >
                   <Link to={item.path}>{item.title}</Link>
-                  {dropdown && <Dropdown />}
+                  {dropdownEquation && <EquationDropDown/>}
                 </li>
               );
             }
-            else if (item.title === "LinearAlgebra") {
+            if (item.title === "LinearAlgebra") {
               return (
                 <li
                   key={item.id}
                   className={item.cName}
-                  onMouseEnter={() => setDropdown(true)}
-                  onMouseLeave={() => setDropdown(false)}
+                  onMouseEnter={() => setDropdownAlgebra(true)}
+                  onMouseLeave={() => setDropdownAlgebra(false)}
                 >
                   <Link to={item.path}>{item.title}</Link>
-                  {dropdown && <Dropdown />}
+                  {dropdownAlgebra && <AlgebraDropDown />}
+                </li>
+              );
+            }
+            if (item.title === "Interpolation") {
+              return (
+                <li
+                  key={item.id}
+                  className={item.cName}
+                  onMouseEnter={() => setDropdownInterpolation(true)}
+                  onMouseLeave={() => setDropdownInterpolation(false)}
+                >
+                  <Link to={item.path}>{item.title}</Link>
+                  {dropdownInterpolation && <InterpolationDropDown />}
+                </li>
+              );
+            }
+            if (item.title === "Regression") {
+              return (
+                <li
+                  key={item.id}
+                  className={item.cName}
+                  onMouseEnter={() => setDropdownRegression(true)}
+                  onMouseLeave={() => setDropdownRegression(false)}
+                >
+                  <Link to={item.path}>{item.title}</Link>
+                  {dropdownRegression && <RegressionDropDown />}
                 </li>
               );
             }
@@ -51,7 +82,6 @@ function Navbar() {
           })}
         </ul>
         
-        <Button />
       </nav>
     </div>
   );

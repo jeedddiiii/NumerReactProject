@@ -23,7 +23,13 @@ export const navItems =[
         title: 'Interpolation',
         path: '/interpolation',
         cName: 'nav-item'
-    }
+    },
+    {
+        id: 5,
+        title: 'Regression',
+        path: '/regression',
+        cName: 'nav-item'
+    },
 ];
 export const rootofequationDropdown = [
     {
@@ -61,7 +67,7 @@ export const linearalgebraDropdown = [
     {
         id: 1,
         title: 'CramerRule',
-        path: '/cramerrule',
+        path: '/cramer',
         cName: 'submenu-item'
     },
     {
@@ -78,24 +84,19 @@ export const linearalgebraDropdown = [
     },
     {
         id: 4,
-        title: 'LUdecomposition',
-        path: '/ludecomposition',
+        title: 'MatrixInverse',
+        path: '/matrixinverse',
         cName: 'submenu-item'
     },
+    
     {
         id: 5,
-        title: 'Cholesky',
-        path: '/cholesky',
-        cName: 'submenu-item'
-    },
-    {
-        id: 6,
         title: 'Jacobi',
         path: '/jacobi',
         cName: 'submenu-item'
     },
     {
-        id: 7,
+        id: 6,
         title: 'GaussSeidel',
         path: '/gaussseidel',
         cName: 'submenu-item'
@@ -104,32 +105,40 @@ export const linearalgebraDropdown = [
 export const interpolationDropdown = [
     {
         id: 1,
+        title: 'NewtonDivided',
+        path: '/newtondivided',
+        cName: 'submenu-item'
+    },
+    {
+        id: 2,
+        title: 'Spline',
+        path: '/spline',
+        cName: 'submenu-item'
+    },
+    {
+        id: 3,
+        title: 'Lagrange',
+        path: '/lagrange',
+        cName: 'submenu-item'
+    },
+];
+export const regressionDropdown = [
+    {
+        id: 1,
         title: 'Linear',
         path: '/linear',
         cName: 'submenu-item'
     },
     {
         id: 2,
-        title: 'Quadratic',
-        path: '/quadratic',
-        cName: 'submenu-item'
-    },
-    {
-        id: 3,
         title: 'Polynomial',
         path: '/polynomial',
         cName: 'submenu-item'
     },
     {
-        id: 4,
-        title: 'Lagrange',
-        path: '/lagrange',
-        cName: 'submenu-item'
-    },
-    {
-        id: 5,
-        title: 'Spline',
-        path: '/spline',
+        id: 3,
+        title: 'Multiple',
+        path: '/multiple',
         cName: 'submenu-item'
     }
 ];
